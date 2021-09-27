@@ -1,16 +1,16 @@
-import React, {useState} from 'react';
+import React, { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
-import { DisplayBooks } from './components/displayBooks';
-import { Categories } from './components/categories';
-import { Input } from './components/input';
-import { InputButton } from './components/inputButton';
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link,
 } from 'react-router-dom';
+import DisplayBooks from './components/displayBooks';
+import Categories from './components/categories';
+import Input from './components/input';
+import InputButton from './components/inputButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
@@ -19,22 +19,22 @@ function App() {
 
   const inputHandler = (e) => {
     setInput(e.target.value);
-  }
+  };
 
-  const submitTodoHandler = (e) => {
+  const submitTodoHandler = () => {
     setTodos([
-      ...todos, {id: uuidv4() ,name: input}
+      ...todos, { id: uuidv4(), name: input },
     ]);
     setInput('');
-  }
+  };
 
   const removeTodo = (e) => {
-    setTodos(todos.filter(elem => elem.id !== e.target.parentNode.id))
-  }
+    setTodos(todos.filter((elem) => elem.id !== e.target.parentNode.id));
+  };
 
   return (
     <div className="App">
-       <Router>
+      <Router>
         <div>
           <nav className="d-flex align-items-center justify-content-between">
             <h1 className="px-5"><b>To Do List</b></h1>
@@ -52,7 +52,7 @@ function App() {
           <Switch>
             <Route exact path="/">
               <Input input={input} inputHandler={inputHandler} />
-              <InputButton submitTodoHandler={submitTodoHandler}/>
+              <InputButton submitTodoHandler={submitTodoHandler} />
               <DisplayBooks removeTodo={removeTodo} todos={todos} />
             </Route>
             <Route path="/categories">

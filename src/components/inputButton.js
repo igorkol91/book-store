@@ -1,7 +1,12 @@
-import React from "react";
+import React from 'react';
+import PropTypes from 'prop-types';
 
-export const InputButton = ({submitTodoHandler}) => {
-    return (
-        <button onClick={submitTodoHandler} type="submit">Submit</button>
-    )
-}
+const InputButton = ({ submitTodoHandler }) => (
+  <button onClick={submitTodoHandler} type="submit">Submit</button>
+);
+
+InputButton.propTypes = {
+  submitTodoHandler: PropTypes.func.isRequired,
+};
+
+export default InputButton;
