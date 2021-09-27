@@ -14,7 +14,7 @@ import {
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
-  const [todos, setTodos] = useState([{id: 1, name:'default1',}, {id:2, name: 'default2'}]);
+  const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
 
   const inputHandler = (e) => {
