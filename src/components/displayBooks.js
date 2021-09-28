@@ -1,12 +1,15 @@
 import React from 'react';
+import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
+import { removeBook } from '../redux/books/books';
 
-const DisplayBooks = ({ todos, removeTodo }) => {
+const DisplayBooks = ({ todos }) => {
+  const dispatch = useDispatch();
   const allTodos = todos.map((element) => (
     <li key={element.id} id={element.id}>
-      {element.name}
+      {element.title}
       {' '}
-      <button onClick={removeTodo} type="button">X</button>
+      <button onClick={() => dispatch(removeBook(element.id))} type="button">X</button>
     </li>
   ));
   return (
@@ -17,7 +20,6 @@ const DisplayBooks = ({ todos, removeTodo }) => {
 };
 
 DisplayBooks.propTypes = {
-  todos: PropTypes.string.isRequired,
-  removeTodo: PropTypes.func.isRequired,
+  todos: PropTypes.arrayOf(Object).isRequired,
 };
 export default DisplayBooks;

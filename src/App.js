@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import {
@@ -12,24 +13,26 @@ import Categories from './components/categories';
 import Input from './components/input';
 import InputButton from './components/inputButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import your Action Creators
+import { addBook } from './redux/books/books';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const store = useSelector((state) => state);
   const [input, setInput] = useState('');
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
 
   const submitTodoHandler = () => {
-    setTodos([
-      ...todos, { id: uuidv4(), name: input },
-    ]);
+    const newBook = {
+      id: uuidv4(),
+      title: input,
+      author: 'Igor',
+    };
+    dispatch(addBook(newBook));
     setInput('');
-  };
-
-  const removeTodo = (e) => {
-    setTodos(todos.filter((elem) => elem.id !== e.target.parentNode.id));
   };
 
   return (
@@ -53,7 +56,7 @@ function App() {
             <Route exact path="/">
               <Input input={input} inputHandler={inputHandler} />
               <InputButton submitTodoHandler={submitTodoHandler} />
-              <DisplayBooks removeTodo={removeTodo} todos={todos} />
+              <DisplayBooks todos={store.booksReducer} input={input} setInput={setInput} />
             </Route>
             <Route path="/categories">
               <Categories />
