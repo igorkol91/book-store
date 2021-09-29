@@ -11,6 +11,7 @@ import {
 import DisplayBooks from './components/displayBooks';
 import Categories from './components/categories';
 import Input from './components/input';
+import AuthorInput from './components/authorInput';
 import InputButton from './components/inputButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import your Action Creators
@@ -19,17 +20,23 @@ import { addBook } from './redux/books/books';
 function App() {
   const store = useSelector((state) => state);
   const [input, setInput] = useState('');
+  const [authorinput, setauthorInput] = useState('');
   const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
 
-  const submitTodoHandler = () => {
+  const authorInputHandler = (e) => {
+    setauthorInput(e.target.value);
+  };
+
+  const submitBookHandler = (e) => {
+    e.preventDefault();
     const newBook = {
       id: uuidv4(),
       title: input,
-      author: 'Igor',
+      author: authorinput,
     };
     dispatch(addBook(newBook));
     setInput('');
@@ -54,9 +61,12 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/">
-              <Input input={input} inputHandler={inputHandler} />
-              <InputButton submitTodoHandler={submitTodoHandler} />
-              <DisplayBooks todos={store.booksReducer} input={input} setInput={setInput} />
+              <form>
+                <AuthorInput input={authorinput} inputHandler={authorInputHandler} />
+                <Input input={input} inputHandler={inputHandler} />
+                <InputButton submitBookHandler={submitBookHandler} />
+              </form>
+              <DisplayBooks books={store.booksReducer} input={input} setInput={setInput} />
             </Route>
             <Route path="/categories">
               <Categories />

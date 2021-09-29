@@ -3,10 +3,12 @@ import { useDispatch } from 'react-redux';
 import PropTypes from 'prop-types';
 import { removeBook } from '../redux/books/books';
 
-const DisplayBooks = ({ todos }) => {
+const DisplayBooks = ({ books }) => {
   const dispatch = useDispatch();
-  const allTodos = todos.map((element) => (
+  const allBooks = books.map((element) => (
     <li key={element.id} id={element.id}>
+      {element.author}
+      :
       {element.title}
       {' '}
       <button onClick={() => dispatch(removeBook(element.id))} type="button">X</button>
@@ -14,12 +16,12 @@ const DisplayBooks = ({ todos }) => {
   ));
   return (
     <div>
-      <h5>{allTodos}</h5>
+      <h5>{allBooks}</h5>
     </div>
   );
 };
 
 DisplayBooks.propTypes = {
-  todos: PropTypes.arrayOf(Object).isRequired,
+  books: PropTypes.arrayOf(Object).isRequired,
 };
 export default DisplayBooks;
