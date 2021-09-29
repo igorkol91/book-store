@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
 import {
@@ -10,26 +11,35 @@ import {
 import DisplayBooks from './components/displayBooks';
 import Categories from './components/categories';
 import Input from './components/input';
+import AuthorInput from './components/authorInput';
 import InputButton from './components/inputButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import your Action Creators
+import { addBook } from './redux/books/books';
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const store = useSelector((state) => state);
   const [input, setInput] = useState('');
+  const [authorinput, setauthorInput] = useState('');
+  const dispatch = useDispatch();
 
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
 
-  const submitTodoHandler = () => {
-    setTodos([
-      ...todos, { id: uuidv4(), name: input },
-    ]);
-    setInput('');
+  const authorInputHandler = (e) => {
+    setauthorInput(e.target.value);
   };
 
-  const removeTodo = (e) => {
-    setTodos(todos.filter((elem) => elem.id !== e.target.parentNode.id));
+  const submitBookHandler = (e) => {
+    e.preventDefault();
+    const newBook = {
+      id: uuidv4(),
+      title: input,
+      author: authorinput,
+    };
+    dispatch(addBook(newBook));
+    setInput('');
   };
 
   return (
@@ -51,9 +61,12 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/">
-              <Input input={input} inputHandler={inputHandler} />
-              <InputButton submitTodoHandler={submitTodoHandler} />
-              <DisplayBooks removeTodo={removeTodo} todos={todos} />
+              <form>
+                <AuthorInput input={authorinput} inputHandler={authorInputHandler} />
+                <Input input={input} inputHandler={inputHandler} />
+                <InputButton submitBookHandler={submitBookHandler} />
+              </form>
+              <DisplayBooks books={store.booksReducer} input={input} setInput={setInput} />
             </Route>
             <Route path="/categories">
               <Categories />
