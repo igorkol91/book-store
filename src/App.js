@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { v4 as uuidv4 } from 'uuid';
 import './App.css';
@@ -14,32 +14,37 @@ import Input from './components/input';
 import AuthorInput from './components/authorInput';
 import InputButton from './components/inputButton';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import your Action Creators
-import { addBook } from './redux/books/books';
+import { addBooksMid, showBooks } from './redux/books/books';
 
 function App() {
   const store = useSelector((state) => state);
   const [input, setInput] = useState('');
-  const [authorinput, setauthorInput] = useState('');
+  const [categoryInput, setcategoryInput] = useState('');
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(showBooks());
+  }, []);
 
   const inputHandler = (e) => {
     setInput(e.target.value);
   };
 
   const authorInputHandler = (e) => {
-    setauthorInput(e.target.value);
+    setcategoryInput(e.target.value);
   };
 
   const submitBookHandler = (e) => {
     e.preventDefault();
     const newBook = {
-      id: uuidv4(),
+      item_id: uuidv4(),
       title: input,
-      author: authorinput,
+      category: categoryInput,
     };
-    dispatch(addBook(newBook));
+
+    dispatch(addBooksMid(newBook));
     setInput('');
+    setcategoryInput('');
   };
 
   return (
@@ -62,7 +67,7 @@ function App() {
           <Switch>
             <Route exact path="/">
               <form>
-                <AuthorInput input={authorinput} inputHandler={authorInputHandler} />
+                <AuthorInput input={categoryInput} inputHandler={authorInputHandler} />
                 <Input input={input} inputHandler={inputHandler} />
                 <InputButton submitBookHandler={submitBookHandler} />
               </form>
