@@ -1,39 +1,51 @@
-.App {
-  text-align: center;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.liBtn {
+  border: none;
+  font-size: 0.9em;
+  margin-right: 1em;
+  color: rgb(94, 148, 247);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.categoryH6 {
+  color: rgba(0, 0, 0, 0.5);
+  font-weight: bold;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+.titleH3 {
+  font-weight: bold;
+  color: black;
+}
+
+.authorH6 {
+  color: rgb(94, 148, 247);
+  font-size: 0.9em;
+}
+
+.circleDiv {
+  height: 4em;
+  width: 4em;
+  border-top: 4px solid rgb(94, 148, 247);
+  border-right: 4px solid rgb(94, 148, 247);
+  border-bottom: 4px solid rgb(94, 148, 247);
+  border-radius: 50%;
+  align-self: center;
+  transform: rotate(55deg);
+}
+
+.progressBtn {
   color: white;
+  background-color: rgb(94, 148, 247);
+  border: none;
+  white-space: nowrap;
+  border-radius: 3%;
 }
 
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-
-  to {
-    transform: rotate(360deg);
-  }
+.bookInput {
+  border-color: rgba(0, 0, 0, 0.116);
+  padding: 0.6em;
 }

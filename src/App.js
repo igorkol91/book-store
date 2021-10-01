@@ -50,15 +50,15 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div>
-          <nav className="d-flex align-items-center justify-content-between">
-            <h1 className="px-5"><b>To Do List</b></h1>
-            <ul className="d-flex list-unstyled mx-5">
-              <li className="mx-5">
-                <Link to="/">Books</Link>
+        <div className="container-fluid px-5">
+          <nav className="d-flex align-items-center">
+            <h1 className="px-3"><b className="text-primary">Booksstore CMS</b></h1>
+            <ul className="d-flex list-unstyled mx-3 my-1">
+              <li className="mx-3">
+                <Link className="text-dark text-decoration-none" to="/">Books</Link>
               </li>
-              <li className="mx-5">
-                <Link to="/categories">Categories</Link>
+              <li className="mx-3">
+                <Link className="text-secondary text-decoration-none" to="/categories">Categories</Link>
               </li>
             </ul>
           </nav>
@@ -66,12 +66,13 @@ function App() {
             renders the first one that matches the current URL. */}
           <Switch>
             <Route exact path="/">
+              <DisplayBooks books={store.booksReducer} input={input} setInput={setInput} />
               <form>
+                <h2 className="categoryH6">Add new Book</h2>
                 <AuthorInput input={categoryInput} inputHandler={authorInputHandler} />
                 <Input input={input} inputHandler={inputHandler} />
                 <InputButton submitBookHandler={submitBookHandler} />
               </form>
-              <DisplayBooks books={store.booksReducer} input={input} setInput={setInput} />
             </Route>
             <Route path="/categories">
               <Categories />
