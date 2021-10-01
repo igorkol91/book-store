@@ -15,9 +15,9 @@ const Book = (id, category, title) => {
         </h3>
         <h6 className="authorH6">Igor Koloski</h6>
         <div>
-          <button className="liBtn" type="button">Comments</button>
-          <button className="liBtn" onClick={() => dispatch(removeBookMid(id))} type="button">Remove</button>
-          <button className="liBtn" type="button">Edit</button>
+          <button className="liBtn bg-white" type="button">Comments</button>
+          <button className="liBtn bg-white" onClick={() => dispatch(removeBookMid(id))} type="button">Remove</button>
+          <button className="liBtn bg-white" type="button">Edit</button>
         </div>
       </div>
       <div className="d-flex">
