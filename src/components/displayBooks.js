@@ -1,23 +1,17 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
+
 import PropTypes from 'prop-types';
-import { removeBookMid } from '../redux/books/books';
+
+import Book from './book';
 
 const DisplayBooks = ({ books }) => {
-  const dispatch = useDispatch();
   const allBooks = books.map((element) => (
-    <li key={element.item_id} id={element.item_id}>
-      {element.category}
-      :
-      {element.title}
-      {' '}
-      <button onClick={() => dispatch(removeBookMid(element.item_id))} type="button">X</button>
-    </li>
+    Book(element.item_id, element.category, element.title)
   ));
   return (
-    <div>
-      <h5>{allBooks}</h5>
-    </div>
+    <ul className="list-unstyled p-5">
+      {allBooks}
+    </ul>
   );
 };
 
